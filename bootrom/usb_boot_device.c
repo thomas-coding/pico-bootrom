@@ -20,7 +20,6 @@ char serial_number_string[13];
 // todo make descriptor strings should probably belong/come from the configs
 static char *descriptor_strings[] =
         {
-                "",
                 "Raspberry Pi",
                 "RP2 Boot",
                 serial_number_string
@@ -165,8 +164,11 @@ uint32_t msc_get_serial_number32() {
 }
 
 const char *_get_descriptor_string(uint index) {
-    if (index >= count_of(descriptor_strings)) index = 0;
-    return descriptor_strings[index];
+    if (index <= count_of(descriptor_strings)) {
+        return descriptor_strings[index - 1];
+    } else {
+        return "";
+    }
 }
 
 
